@@ -25,6 +25,14 @@ $(".btn").click(function () {
   checkAnswer(userClickedPattern.length - 1);
 });
 
+/** 1. Create a new function called startOver() */
+function startOver() {
+  /** 3. Inside this function , you need to reset the values of level, gamePattern and started variables */
+  level = 0;
+  gamePattern = [];
+  started = false;
+}
+
 function checkAnswer(currentLevel) {
   if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
     console.log("success");
@@ -36,19 +44,17 @@ function checkAnswer(currentLevel) {
     }
   } else {
     console.log("wrong");
-    /** 1. Play the sound wrong.mp3 when user got wrong answer */
     playSound("wrong");
 
-    /**2. add a class game-over to the body of the website when user
-     * got wrong answer, and remove it after 200 miliseconds
-     */
     $("body").addClass("game-over");
     setTimeout(function () {
       $("body").removeClass("game-over");
     }, 200);
 
-    /** 3. change h1 title */
     $("#level-title").text("Game Over, Press Any key to Restart");
+
+    /** 2. call startOver(), if the user gets the sequence wrong */
+    startOver();
   }
 }
 
