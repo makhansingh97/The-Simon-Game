@@ -1,3 +1,5 @@
+/* Step 2 */
+
 // 3. array to store button colours
 var buttonColours = ["red", "blue", "green", "yellow"];
 
@@ -14,4 +16,18 @@ function nextSequence() {
 
   // 6. add the random chosen colour in the last of game pattern array
   gamePattern.push(randomChosenColour);
+
+  /* Step 3 */
+
+  // 1. Use JQuery to select the button with the same id as the randomChosenColour
+  // id of button added lastly generated
+  // since randomChosenColour is allready a string
+  $("#" + randomChosenColour)
+    .fadeIn(100)
+    .fadeOut(100)
+    .fadeIn(100);
+
+  // play audio of the same color randomy chosen
+  var audio = new Audio("sounds/" + randomChosenColour + ".mp3");
+  audio.play();
 }
