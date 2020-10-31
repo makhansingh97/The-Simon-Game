@@ -1,33 +1,34 @@
-/* Step 2 */
-
-// 3. array to store button colours
 var buttonColours = ["red", "blue", "green", "yellow"];
 
-//5. empty array for game pattern
 var gamePattern = [];
 
-// 1. create function named nextSequence
+var userClickedPattern = [];
+
+$(".btn").click(function () {
+  var userChosenColour = $(this).attr("id");
+  userClickedPattern.push(userChosenColour);
+  // 1. when a user clicks a button , play the corressponding sound
+  playSound(userChosenColour);
+});
+
 function nextSequence() {
-  // 2.  generate random number between {0, 1, 2, 3}
   var randomNumber = Math.floor(Math.random() * 4);
-
-  // 4.vrandomly chosen colour using randomNumber generated
   var randomChosenColour = buttonColours[randomNumber];
-
-  // 6. add the random chosen colour in the last of game pattern array
   gamePattern.push(randomChosenColour);
 
-  /* Step 3 */
-
-  // 1. Use JQuery to select the button with the same id as the randomChosenColour
-  // id of button added lastly generated
-  // since randomChosenColour is allready a string
   $("#" + randomChosenColour)
     .fadeIn(100)
     .fadeOut(100)
     .fadeIn(100);
 
-  // play audio of the same color randomy chosen
-  var audio = new Audio("sounds/" + randomChosenColour + ".mp3");
+  // 4. Refactor the code  in playSound(), so that it will work for both nextSequence() and when a user clicks a button
+
+  playSound(randomChosenColour);
+}
+
+// 2. create a new function playSound that takes a single parameter name
+function playSound(name) {
+  // 3. take the code from nextSequence() and add it to Play sound
+  var audio = new Audio("sounds/" + name + ".mp3");
   audio.play();
 }
